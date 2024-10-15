@@ -189,37 +189,17 @@
 		transform: translateY(-5px);
 	}
 	
-	.coming-soon {
+	button {
 		background-color: #f39c12;
 		color: white;
 		padding: 0.5rem 1rem;
 		border: none;
 		border-radius: 5px;
-		cursor: not-allowed;
+		/* cursor: not-allowed; */
 	}
-	
-	/* Footer Section */
-	footer {
-		margin-top: 3rem;
-		display: flex;
-		justify-content: center;
-	}
-	
-	footer button {
-		background: #0a74da;
-		color: white;
-		padding: 1rem 2rem;
-		margin: 1rem;
-		border: none;
-		border-radius: 8px;
-		cursor: pointer;
-		transition: transform 0.3s ease, background-color 0.3s ease;
-		box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-	}
-	
-	footer button:hover {
-		background-color: #084a91;
-		transform: scale(1.1);
+	button:hover{
+		color: red;
+		text-decoration: none;
 	}
 	
 	/* Media Queries for Responsiveness */
@@ -301,10 +281,10 @@
 	<div class="navbar">
 		<div class="logo">Synapse</div>
 		<ul>
-			<li><a href="#">Home</a></li>
-			<li><a href="#">Contact Us</a></li>
-			<li><a href="/aboutus.html">About Us</a></li>
-			<li><a href="#">Profile</a></li>
+			<li><a href="home.html">Home</a></li>
+			<li><a href="contact.html">Contact Us</a></li>
+			<li><a href="aboutus.html">About Us</a></li>
+			<li><a href="profile.html">Profile</a></li>
 			<li><a href="#">Help Bot</a></li>
 		</ul>
 	</div>
@@ -345,26 +325,23 @@
 			<div class="feature-card">
 				<h3>Diabetes Test</h3>
 				<p>a blood glucose meter </p>
-				<button class="coming-soon" disabled>Check Out</button>
+				<a href="diabetes.html"><button class="btn-diabetes" >Check Out</button></a>
+				
 			</div>
 			
 			<div class="feature-card">
 				<h3>Cholesterol</h3>
 				<p>Know Your Cholesterol Level</p>
-				<button class="coming-soon" disabled>---</button>
+				<a href="colesterol.html"><button class="btn-colesterol" >Check Out</button></a>
+				
 			</div>
 			
 			<div class="feature-card">
 				<h3>O2</h3>
 				<p>know your o2 level in your blood </p>
-				<button class="coming-soon" disabled>---</button>
+				<a href="o2test.html"><button class="btn-o2" >Check Out</button></a>
 			</div>
 		</div>
 	</div>
 	
-	<!-- Footer -->
-	<footer>
-		<button>Learn More</button>
-	</footer>
-</body>
 </html>

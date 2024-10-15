@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Synapse</title>
+    <style>
+        body {
+            background: #f0f8ff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+            /* Navigation Bar */
+	.navbar {
+		width: 100%;
+		background-color: #0a74da;
+		padding: 1rem 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 999;
+	}
+
+	.navbar .logo {
+		color: white;
+		font-size: 1.5rem;
+		font-weight: bold;
+		margin-left: 2rem;
+		text-transform: uppercase;
+	}
+
+	.navbar ul {
+		display: flex;
+		list-style: none;
+		margin-right: 2rem;
+	}
+
+	.navbar ul li {
+		margin: 0 .3rem;
+	}
+
+	.navbar ul li a {
+		color: white;
+		text-decoration: none;
+		font-size: 1rem;
+		transition: color 0.3s ease;
+	}
+
+	.navbar ul li a:hover {
+		color: #cce7ff;
+	}
+        .contact-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 80px; /* Adjusted for fixed navbar */
+            width: 100%;
+            max-width: 500px;
+        }
+        h1 {
+            color: #0a74da;
+            margin-bottom: 1rem;
+        }
+        label, input, textarea {
+            display: block;
+            width: 100%;
+            margin: 1rem 0;
+        }
+        input, textarea {
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        textarea {
+            resize: none;
+        }
+        .btn-submit {
+            background-color: #0a74da;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        .btn-submit:hover {
+            background-color: #084a91;
+        }
+        .message {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+	<div class="navbar">
+		<div class="logo">Synapse</div>
+		<ul>
+			<li><a href="home.html">Home</a></li>
+			<li><a href="contact.html">Contact Us</a></li>
+			<li><a href="aboutus.html">About Us</a></li>
+			<li><a href="#">Profile</a></li>
+			<li><a href="#">Help Bot</a></li>
+		</ul>
+	</div>
+
+    <div class="contact-container">
+        <h1>Contact Us</h1>
+        <form id="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" rows="4" required></textarea>
+
+            <button type="submit" class="btn-submit">Send Message</button>
+        </form>
+        <div id="confirmation" class="message"></div>
+    </div>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            const confirmationDiv = document.getElementById('confirmation');
+
+            // Here you can add code to send the form data to a server
+            // For now, we will just display a confirmation message
+            confirmationDiv.innerHTML = `Thank you, ${name}! Your message has been sent.`;
+            confirmationDiv.style.color = '#0a74da';
+            document.getElementById('contact-form').reset(); // Reset the form
+        });
+    </script>
+
+</body>
+</html>

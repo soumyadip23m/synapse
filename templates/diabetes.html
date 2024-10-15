@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Test - Synapse</title>
+    <style>
+        body {
+            background: #f0f8ff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+        }
+             /* Navigation Bar */
+	.navbar {
+		width: 100%;
+		background-color: #0a74da;
+		padding: 1rem 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 999;
+	}
+
+	.navbar .logo {
+		color: white;
+		font-size: 1.5rem;
+		font-weight: bold;
+		margin-left: 2rem;
+		text-transform: uppercase;
+	}
+
+	.navbar ul {
+		display: flex;
+		list-style: none;
+		margin-right: 2rem;
+	}
+
+	.navbar ul li {
+		margin: 0 .3rem;
+	}
+
+	.navbar ul li a {
+		color: white;
+		text-decoration: none;
+		font-size: 1rem;
+		transition: color 0.3s ease;
+	}
+
+	.navbar ul li a:hover {
+		color: #cce7ff;
+	}
+	.test-container {
+		position:relative;
+		background: white;
+		width: auto;
+		padding: 2rem;
+		border-radius: 10px;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+		text-align: center;
+		margin-top: 250px; /* Adjusted for fixed navbar */
+	}
+        h1 {
+            color: #0a74da;
+            margin-bottom: 1rem;
+        }
+        label, input {
+            display: block;
+            width: 100%;
+            margin: 1rem 0;
+        }
+        input {
+			margin-left:-4px;
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .btn-submit {
+            background-color: #0a74da;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        .btn-submit:hover {
+            background-color: #084a91;
+        }
+        .result {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .normal {
+            color: green;
+        }
+        .diabetic {
+            color: red;
+        }
+        .prediabetic {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+	
+    <div class="navbar">
+		<div class="logo">Synapse</div>
+		<ul>
+			<li><a href="home.html">Home</a></li>
+			<li><a href="contact.html">Contact Us</a></li>
+			<li><a href="aboutus.html">About Us</a></li>
+			<li><a href="profile.html">Profile</a></li>
+			<li><a href="#">Help Bot</a></li>
+		</ul>
+	</div>
+    <div class="test-container">
+        <h1>Diabetes Test</h1>
+        <form id="diabetes-form">
+            <label for="glucose">Enter Blood Glucose Level (mg/dL):</label>
+            <input type="number" id="glucose" required>
+            <button type="submit" class="btn-submit">Check Result</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('diabetes-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const glucoseLevel = document.getElementById('glucose').value;
+            const resultDiv = document.getElementById('result');
+            
+            let resultMessage = '';
+            
+            if (glucoseLevel < 100) {
+                resultMessage = '<span class="normal">Your glucose level is normal.</span>';
+            } else if (glucoseLevel >= 100 && glucoseLevel < 126) {
+                resultMessage = '<span class="prediabetic">You are in the prediabetic range.</span>';
+            } else if (glucoseLevel >= 126) {
+                resultMessage = '<span class="diabetic">You may have diabetes. Please consult a doctor.</span>';
+            } else {
+                resultMessage = 'Invalid input. Please try again.';
+            }
+            
+            resultDiv.innerHTML = resultMessage;
+        });
+    </script>
+
+</body>
+</html>
