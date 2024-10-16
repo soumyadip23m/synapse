@@ -13,61 +13,55 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-
         }
         /* Navigation Bar */
-	.navbar {
-		width: 100%;
-		background-color: #0a74da;
-		padding: 1rem 0;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		z-index: 999;
-	}
-
-	.navbar .logo {
-		color: white;
-		font-size: 1.5rem;
-		font-weight: bold;
-		margin-left: 2rem;
-		text-transform: uppercase;
-	}
-
-	.navbar ul {
-		display: flex;
-		list-style: none;
-		margin-right: 2rem;
-	}
-
-	.navbar ul li {
-		margin: 0 .3rem;
-	}
-
-	.navbar ul li a {
-		color: white;
-		text-decoration: none;
-		font-size: 1rem;
-		transition: color 0.3s ease;
-	}
-
-	.navbar ul li a:hover {
-		color: #cce7ff;
-	}
-	.test-container {
-		position:relative;
-		background: white;
-		width: auto;
-		padding: 2rem;
-		border-radius: 10px;
-		box-shadow: 0 0px 12px 1px rgba(0, 0, 0, 0.249);
-		text-align: center;
-		margin-top: 170px; /* Adjusted for fixed navbar */
-	}
+        .navbar {
+            width: 100%;
+            background-color: #0a74da;
+            padding: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+        }
+        .navbar .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-left: 2rem;
+            text-transform: uppercase;
+        }
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            margin-right: 2rem;
+        }
+        .navbar ul li {
+            margin: 0 .3rem;
+        }
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+        .navbar ul li a:hover {
+            color: #cce7ff;
+        }
+        .test-container {
+            position:relative;
+            background: white;
+            width: auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0px 12px 1px rgba(0, 0, 0, 0.249);
+            text-align: center;
+            margin-top: 170px; /* Adjusted for fixed navbar */
+        }
         h1 {
             color: #0a74da;
             margin-bottom: 1rem;
@@ -109,37 +103,51 @@
         .borderline {
             color: orange;
         }
+        .section-title {
+            margin-top: 2rem;
+            font-weight: bold;
+            font-size: 1.4rem;
+            color: #0a74da;
+        }
     </style>
 </head>
 <body>
 
     <div class="navbar">
-		<div class="logo">Synapse</div>
-		<ul>
-			<li><a href="home.html">Home</a></li>
-			<li><a href="contact.html">Contact Us</a></li>
-			<li><a href="aboutus.html">About Us</a></li>
-			<li><a href="profile.html">Profile</a></li>
-			<li><a href="#">Help Bot</a></li>
-		</ul>
-	</div>
+        <div class="logo">Synapse</div>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="#">Help Bot</a></li>
+        </ul>
+    </div>
 
     <div class="test-container">
         <h1>Cholesterol Test</h1>
+
+        <!-- Section for manual input -->
+        <div class="section-title">Manual Input</div>
         <form id="cholesterol-form">
             <label for="cholesterol">Enter Cholesterol Level (mg/dL):</label>
             <input type="number" id="cholesterol" required>
             <button type="submit" class="btn-submit">Check Result</button>
         </form>
-        <div id="result" class="result"></div>
+        <div id="manual-result" class="result"></div>
+
+        <!-- Section for real-time data -->
+        <div class="section-title">Real-Time Data from Device</div>
+        <div id="real-time-result" class="result">Fetching real-time cholesterol level...</div>
     </div>
 
     <script>
+        // Manual input cholesterol test logic
         document.getElementById('cholesterol-form').addEventListener('submit', function(event) {
             event.preventDefault();
             
             const cholesterolLevel = document.getElementById('cholesterol').value;
-            const resultDiv = document.getElementById('result');
+            const manualResultDiv = document.getElementById('manual-result');
             
             let resultMessage = '';
             
@@ -153,8 +161,31 @@
                 resultMessage = 'Invalid input. Please try again.';
             }
             
-            resultDiv.innerHTML = resultMessage;
+            manualResultDiv.innerHTML = resultMessage;
         });
+
+        // Simulate fetching real-time data from an external device
+        function fetchRealTimeData() {
+            const realTimeResultDiv = document.getElementById('real-time-result');
+
+            // Simulated cholesterol level fetched from a device
+            const realTimeCholesterolLevel = Math.floor(Math.random() * (300 - 150 + 1)) + 150; // Random value between 150 and 300
+
+            let realTimeMessage = '';
+
+            if (realTimeCholesterolLevel < 200) {
+                realTimeMessage = `<span class="normal">Real-time cholesterol level: ${realTimeCholesterolLevel} mg/dL - Normal</span>`;
+            } else if (realTimeCholesterolLevel >= 200 && realTimeCholesterolLevel < 240) {
+                realTimeMessage = `<span class="borderline">Real-time cholesterol level: ${realTimeCholesterolLevel} mg/dL - Borderline High</span>`;
+            } else {
+                realTimeMessage = `<span class="high">Real-time cholesterol level: ${realTimeCholesterolLevel} mg/dL - High. Consult a doctor.</span>`;
+            }
+
+            realTimeResultDiv.innerHTML = realTimeMessage;
+        }
+
+        // Fetch real-time data every 5 seconds (simulated)
+        setInterval(fetchRealTimeData, 5000);
     </script>
 
 </body>

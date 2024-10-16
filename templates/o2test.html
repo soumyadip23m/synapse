@@ -14,73 +14,78 @@
             min-height: 100vh;
             margin: 0;
         }
-	/* Navigation Bar */
-	.navbar {
-		width: 100%;
-		background-color: #0a74da;
-		padding: 1rem 0;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		z-index: 999;
-	}
+        /* Navigation Bar */
+        .navbar {
+            width: 100%;
+            background-color: #0a74da;
+            padding: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+        }
 
-	.navbar .logo {
-		color: white;
-		font-size: 1.5rem;
-		font-weight: bold;
-		margin-left: 2rem;
-		text-transform: uppercase;
-	}
+        .navbar .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-left: 2rem;
+            text-transform: uppercase;
+        }
 
-	.navbar ul {
-		display: flex;
-		list-style: none;
-		margin-right: 2rem;
-	}
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            margin-right: 2rem;
+        }
 
-	.navbar ul li {
-		margin: 0 .3rem;
-	}
+        .navbar ul li {
+            margin: 0 .3rem;
+        }
 
-	.navbar ul li a {
-		color: white;
-		text-decoration: none;
-		font-size: 1rem;
-		transition: color 0.3s ease;
-	}
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
 
-	.navbar ul li a:hover {
-		color: #cce7ff;
-	}
-	.test-container {
-		position:relative;
-		background: white;
-		width: auto;
-		padding: 2rem;
-		border-radius: 10px;
-		box-shadow: 0 0px 12px 1px rgba(0, 0, 0, 0.249);
-		text-align: center;
-		margin-top: 170px; /* Adjusted for fixed navbar */
-	}
+        .navbar ul li a:hover {
+            color: #cce7ff;
+        }
+
+        .test-container {
+            position: relative;
+            background: white;
+            width: auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0px 12px 1px rgba(0, 0, 0, 0.249);
+            text-align: center;
+            margin-top: 170px; /* Adjusted for fixed navbar */
+        }
+
         h1 {
             color: #0a74da;
             margin-bottom: 1rem;
         }
+
         label, input {
             display: block;
             width: 100%;
             margin: 1rem 0;
         }
+
         input {
             padding: 0.5rem;
             border-radius: 5px;
             border: 1px solid #ddd;
         }
+
         .btn-submit {
             background-color: #0a74da;
             color: white;
@@ -91,49 +96,82 @@
             transition: background-color 0.3s ease;
             width: 100%;
         }
+
         .btn-submit:hover {
             background-color: #084a91;
         }
+
         .result {
             margin-top: 1rem;
             font-size: 1.2rem;
             color: #333;
         }
+
         .normal {
             color: green;
         }
+
         .low {
             color: red;
         }
+
         .high {
             color: orange;
+        }
+
+        /* Styling for real-time data section */
+        .realtime-section {
+            margin-top: 2rem;
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .realtime-data {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
         }
     </style>
 </head>
 <body>
 
-	<div class="navbar">
-		<div class="logo">Synapse</div>
-		<ul>
-			<li><a href="home.html">Home</a></li>
-			<li><a href="contact.html">Contact Us</a></li>
-			<li><a href="aboutus.html">About Us</a></li>
-			<li><a href="profile.html">Profile</a></li>
-			<li><a href="#">Help Bot</a></li>
-		</ul>
-	</div>
+    <!-- Navigation bar -->
+    <div class="navbar">
+        <div class="logo">Synapse</div>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="#">Help Bot</a></li>
+        </ul>
+    </div>
 
+    <!-- Main container for O2 Test -->
     <div class="test-container">
         <h1>O₂ Test</h1>
+
+        <!-- Manual Input Section -->
         <form id="o2-form">
+            <h2>Manual Input</h2>
             <label for="oxygen">Enter Blood Oxygen Saturation (%):</label>
             <input type="number" id="oxygen" required min="0" max="100">
             <button type="submit" class="btn-submit">Check Result</button>
         </form>
+
         <div id="result" class="result"></div>
+
+        <!-- Real-Time Data Section -->
+        <div class="realtime-section">
+            <h2>Real-Time Oxygen Saturation</h2>
+            <p id="realtime-data" class="realtime-data">Fetching data...</p>
+        </div>
     </div>
 
     <script>
+        // Manual input form submission
         document.getElementById('o2-form').addEventListener('submit', function(event) {
             event.preventDefault();
             
@@ -154,6 +192,26 @@
             
             resultDiv.innerHTML = resultMessage;
         });
+
+        // Simulating real-time data fetch
+        // Replace this simulation with the actual code to fetch data from the device
+        function fetchRealTimeData() {
+            // Simulating fetching from a device (Randomized data for the demo)
+            const simulatedData = Math.floor(Math.random() * (100 - 85 + 1)) + 85;
+            document.getElementById('realtime-data').innerText = simulatedData + "%";
+
+            // Update this section with real conditions if needed
+            if (simulatedData >= 95) {
+                document.getElementById('realtime-data').style.color = 'green';
+            } else if (simulatedData >= 90 && simulatedData < 95) {
+                document.getElementById('realtime-data').style.color = 'orange';
+            } else {
+                document.getElementById('realtime-data').style.color = 'red';
+            }
+        }
+
+        // Call the function every 5 seconds (Simulating real-time data update)
+        setInterval(fetchRealTimeData, 5000);
     </script>
 
 </body>

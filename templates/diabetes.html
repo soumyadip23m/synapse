@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device=width, initial-scale=1.0">
     <title>Diabetes Test - Synapse</title>
     <style>
         body {
@@ -13,75 +13,99 @@
             align-items: center;
             margin: 0;
         }
-             /* Navigation Bar */
-	.navbar {
-		width: 100%;
-		background-color: #0a74da;
-		padding: 1rem 0;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		z-index: 999;
-	}
+        /* Navigation Bar */
+        .navbar {
+            width: 100%;
+            background-color: #0a74da;
+            padding: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+        }
 
-	.navbar .logo {
-		color: white;
-		font-size: 1.5rem;
-		font-weight: bold;
-		margin-left: 2rem;
-		text-transform: uppercase;
-	}
+        .navbar .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-left: 2rem;
+            text-transform: uppercase;
+        }
 
-	.navbar ul {
-		display: flex;
-		list-style: none;
-		margin-right: 2rem;
-	}
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            margin-right: 2rem;
+        }
 
-	.navbar ul li {
-		margin: 0 .3rem;
-	}
+        .navbar ul li {
+            margin: 0 .3rem;
+        }
 
-	.navbar ul li a {
-		color: white;
-		text-decoration: none;
-		font-size: 1rem;
-		transition: color 0.3s ease;
-	}
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
 
-	.navbar ul li a:hover {
-		color: #cce7ff;
-	}
-	.test-container {
-		position:relative;
-		background: white;
-		width: auto;
-		padding: 2rem;
-		border-radius: 10px;
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-		text-align: center;
-		margin-top: 250px; /* Adjusted for fixed navbar */
-	}
-        h1 {
+        .navbar ul li a:hover {
+            color: #cce7ff;
+        }
+
+        .test-container {
+            position: relative;
+            background: white;
+            width: auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 250px; /* Adjusted for fixed navbar */
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 600px;
+            margin-top: 2rem;
+            align-items: center;
+        }
+
+        .form-section, .result-section, .device-section {
+            width: 100%;
+            padding: 2rem;
+            margin: 1rem 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .form-section h1, .result-section h1, .device-section h1 {
             color: #0a74da;
             margin-bottom: 1rem;
         }
+
         label, input {
             display: block;
             width: 100%;
             margin: 1rem 0;
         }
+
         input {
-			margin-left:-4px;
+            margin-left: -4px;
             padding: 0.5rem;
             border-radius: 5px;
             border: 1px solid #ddd;
         }
-        .btn-submit {
+
+        .btn-submit, .btn-fetch {
             background-color: #0a74da;
             color: white;
             border: none;
@@ -91,67 +115,132 @@
             transition: background-color 0.3s ease;
             width: 100%;
         }
-        .btn-submit:hover {
+
+        .btn-submit:hover, .btn-fetch:hover {
             background-color: #084a91;
         }
+
         .result {
             margin-top: 1rem;
             font-size: 1.2rem;
             color: #333;
         }
+
         .normal {
             color: green;
         }
+
         .diabetic {
             color: red;
         }
+
         .prediabetic {
             color: orange;
+        }
+
+        .tips {
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: #333;
+            background: #f8f8f8;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .fetched-level {
+            font-weight: bold;
+            color: #0a74da;
         }
     </style>
 </head>
 <body>
-	
+
     <div class="navbar">
-		<div class="logo">Synapse</div>
-		<ul>
-			<li><a href="home.html">Home</a></li>
-			<li><a href="contact.html">Contact Us</a></li>
-			<li><a href="aboutus.html">About Us</a></li>
-			<li><a href="profile.html">Profile</a></li>
-			<li><a href="#">Help Bot</a></li>
-		</ul>
-	</div>
-    <div class="test-container">
-        <h1>Diabetes Test</h1>
-        <form id="diabetes-form">
-            <label for="glucose">Enter Blood Glucose Level (mg/dL):</label>
-            <input type="number" id="glucose" required>
-            <button type="submit" class="btn-submit">Check Result</button>
-        </form>
-        <div id="result" class="result"></div>
+        <div class="logo">Synapse</div>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="#">Help Bot</a></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <!-- Form Section -->
+        <div class="form-section">
+            <h1>Diabetes Test</h1>
+            <form id="diabetes-form">
+                <label for="glucose">Enter Blood Glucose Level (mg/dL):</label>
+                <input type="number" id="glucose" required>
+                <button type="submit" class="btn-submit">Check Result</button>
+            </form>
+        </div>
+
+        <!-- Device Section -->
+        <div class="device-section">
+            <h1>Fetch Data from Device</h1>
+            <p>Press the button to fetch glucose level data from an external device.</p>
+            <button id="fetch-device-data" class="btn-fetch">Fetch from Device</button>
+        </div>
+
+        <!-- Result Section -->
+        <div class="result-section">
+            <h1>Your Result</h1>
+            <div id="fetched-level" class="fetched-level">
+                <!-- Fetched glucose level will be displayed here -->
+            </div>
+            <div id="result" class="result">
+                <!-- Result will appear here -->
+            </div>
+            <div id="tips" class="tips">
+                <!-- Tips will appear here -->
+            </div>
+        </div>
     </div>
 
     <script>
-        document.getElementById('diabetes-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const glucoseLevel = document.getElementById('glucose').value;
+        function processGlucoseLevel(glucoseLevel) {
             const resultDiv = document.getElementById('result');
-            
+            const tipsDiv = document.getElementById('tips');
+            const fetchedLevelDiv = document.getElementById('fetched-level');
+
             let resultMessage = '';
-            
+            let tipsMessage = '';
+
+            fetchedLevelDiv.innerHTML = `Glucose Level: <span>${glucoseLevel} mg/dL</span>`;
+
             if (glucoseLevel < 100) {
                 resultMessage = '<span class="normal">Your glucose level is normal.</span>';
+                tipsMessage = 'Keep maintaining a healthy diet and lifestyle. Stay physically active and consume a balanced diet rich in whole grains, vegetables, and lean proteins.';
             } else if (glucoseLevel >= 100 && glucoseLevel < 126) {
                 resultMessage = '<span class="prediabetic">You are in the prediabetic range.</span>';
+                tipsMessage = 'Try to reduce your sugar intake and increase physical activity. Focus on a diet that includes more fiber-rich foods, like whole grains, fruits, and vegetables. Avoid sugary drinks and processed foods.';
             } else if (glucoseLevel >= 126) {
                 resultMessage = '<span class="diabetic">You may have diabetes. Please consult a doctor.</span>';
+                tipsMessage = 'Consult your doctor for a full diagnosis. To manage diabetes, focus on regular monitoring of blood sugar levels, maintain a healthy weight, and include foods like whole grains, legumes, leafy greens, and lean proteins in your diet. Limit sugary and high-carb foods.';
             } else {
                 resultMessage = 'Invalid input. Please try again.';
+                tipsMessage = '';
             }
-            
+
             resultDiv.innerHTML = resultMessage;
+            tipsDiv.innerHTML = tipsMessage;
+        }
+
+        // Manual input form submission
+        document.getElementById('diabetes-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const glucoseLevel = document.getElementById('glucose').value;
+            processGlucoseLevel(glucoseLevel);
+        });
+
+        // Simulated device data fetching
+        document.getElementById('fetch-device-data').addEventListener('click', function() {
+            // Simulate fetching data from an external device
+            const fetchedGlucoseLevel = Math.floor(Math.random() * 200); // Random glucose level between 0 and 200
+            processGlucoseLevel(fetchedGlucoseLevel);
         });
     </script>
 
