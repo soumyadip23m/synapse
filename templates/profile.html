@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Synapse Medical Website</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #b2f2bb, #e3f8ff, #c3f7e4); /* Gradient background */
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            width: 300px;
+            text-align: left;
+        }
+
+        .profile-card h2 {
+            margin-bottom: 10px;
+            color: #0a74da; /* Heading color */
+        }
+
+        .profile-card p {
+            margin-bottom: 5px;
+        }
+
+        .logout-btn {
+            background-color: #ff5e57; /* Logout button color */
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            padding: 10px 15px;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .logout-btn:hover {
+            background-color: #e03226; /* Darker shade on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Synapse</h1>
+    </header>
+
+    <div class="profile-card">
+        <h2>User Profile</h2>
+        <p><strong>Name:</strong> <span id="username"></span></p>
+        <p><strong>Age:</strong> <span id="age"></span></p>
+        <p><strong>Gender:</strong> <span id="gender"></span></p>
+        <p><strong>Height:</strong> <span id="height"></span> cm</p>
+        <p><strong>Weight:</strong> <span id="weight"></span> kg</p>
+        <p><strong>Email:</strong> <span id="email"></span></p>
+        <p><strong>Last Sign In:</strong> October 17, 2024</p>
+        
+        <button class="logout-btn">Logout</button>
+    </div>
+
+    <script>
+        // JavaScript for Logout Button
+        document.querySelector('.logout-btn').addEventListener('click', function() {
+            // Simulate logout action (redirect to login page or clear session, etc.)
+            alert('Logged out successfully!');
+            window.location.href = 'login.html'; // Replace with actual logout action
+        });
+
+        // Retrieve user information from localStorage and display
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            document.getElementById('username').textContent = user.username;
+            document.getElementById('age').textContent = user.age;
+            document.getElementById('gender').textContent = user.gender;
+            document.getElementById('height').textContent = user.height;
+            document.getElementById('weight').textContent = user.weight;
+            document.getElementById('email').textContent = user.email;
+        }
+    </script>
+</body>
+</html>

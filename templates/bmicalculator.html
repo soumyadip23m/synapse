@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Measurement - Synapse</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background-color: #0a74da;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+        }
+
+        .navbar .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-left: 20px;
+            text-transform: uppercase;
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            margin-right: 20px;
+        }
+
+        .navbar ul li {
+            margin: 0 10px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            color: #cce7ff;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            color: #0a74da;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Form Section */
+        .form-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            text-align: left;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        form label,
+        form input {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        form input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .btn-submit {
+            background-color: #0a74da;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn-submit:hover {
+            background-color: #084a91;
+        }
+
+        /* Result Section */
+        .result-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .result-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .result-card h2 {
+            font-size: 2rem;
+            color: #0a74da;
+            margin-bottom: 10px;
+        }
+
+        .result-card p {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="logo">Synapse</div>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="#">Help Bot</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="hero-section">
+            <h1>BMI Measurement</h1>
+            <p>Calculate your Body Mass Index (BMI)</p>
+        </div>
+
+        <div class="form-section">
+            <form id="bmiForm">
+                <label for="height">Height (cm):</label>
+                <input type="number" id="height" name="height" required>
+
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" name="weight" required>
+
+                <button type="submit" class="btn-submit">Calculate BMI</button>
+            </form>
+        </div>
+
+        <!-- Result Section -->
+        <div class="result-section" id="resultSection" style="display: none;">
+            <div class="result-card" id="resultCard">
+                <h2>Your BMI:</h2>
+                <p id="bmiResult"></p>
+                <p id="bmiCategory"></p>
+                <p id="bmiStatement"></p> <!-- New statement paragraph -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for BMI Calculation -->
+    <script>
+        document.getElementById('bmiForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Fetching height and weight from form inputs
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            
+            // Calculate BMI
+            const bmi = calculateBMI(height, weight);
+            
+            // Display result
+            displayResult(bmi);
+        });
+
+        // Function to calculate BMI
+        function calculateBMI(height, weight) {
+            // Convert height to meters
+            const heightInMeters = height / 100;
+            // Calculate BMI
+            const bmiValue = weight / (heightInMeters * heightInMeters);
+            return bmiValue.toFixed(2);
+        }
+
+        // Function to display result
+        function displayResult(bmi) {
+            document.getElementById('bmiResult').textContent = `BMI: ${bmi}`;
+
+            // Determine BMI category
+            let bmiCategory = '';
+            let bmiStatement = '';
+
+            if (bmi < 18.5) {
+                bmiCategory = 'Underweight';
+                bmiStatement = 'You are underweight. Consider consulting a healthcare provider for advice.';
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+                bmiCategory = 'Normal weight';
+                bmiStatement = 'Congratulations! You are within the healthy weight range.';
+            } else if (bmi >= 25 && bmi < 29.9) {
+                bmiCategory = 'Overweight';
+                bmiStatement = 'You are overweight. Consider adopting a healthier lifestyle.';
+            } else {
+                bmiCategory = 'Obesity';
+                bmiStatement = 'You are obese. It is recommended to seek medical advice for weight management.';
+            }
+
+            // Display BMI category and statement
+            document.getElementById('bmiCategory').textContent = `Category: ${bmiCategory}`;
+            document.getElementById('bmiStatement').textContent = bmiStatement;
+
+            // Show result section
+            document.getElementById('resultSection').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
